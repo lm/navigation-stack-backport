@@ -1,0 +1,34 @@
+{
+  "configurations" : [
+    {
+      "id" : "FF8FB074-BF18-46EE-A592-F15C530826E5",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "testExecutionOrdering" : "random",
+    "testTimeoutsEnabled" : true
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:TestApp.xcodeproj",
+        "identifier" : "8A1434512917CAEB00E8DE1B",
+        "name" : "TestAppUITests"
+      }
+    },
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:..\/..\/Medevio\/NavigationStackBackport",
+        "identifier" : "NavigationStackBackportTests",
+        "name" : "NavigationStackBackportTests"
+      }
+    }
+  ],
+  "version" : 1
+}
