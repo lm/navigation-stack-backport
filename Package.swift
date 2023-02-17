@@ -5,6 +5,7 @@ let package = Package(
 	name: "navigation-stack-backport",
 	platforms: [
 		.iOS(.v14),
+        .macOS(.v12),
 	],
 	products: [
 		.library(name: "NavigationStackBackport", targets: ["NavigationStackBackport"]),

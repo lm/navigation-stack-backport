@@ -1,0 +1,15 @@
+import SwiftUI
+
+#if os(iOS)
+typealias NavigationController = UINavigationController
+typealias NavigationControllerDelegate = UINavigationControllerDelegate
+typealias ViewController = UIViewController
+typealias HostingController = UIHostingController
+typealias ViewControllerRepresentable = UIViewControllerRepresentable
+#else
+typealias NavigationController = KSNavigationController
+typealias NavigationControllerDelegate = KSNavigationControllerDelegate
+typealias ViewController = NSViewController
+typealias HostingController = NSHostingController
+typealias ViewControllerRepresentable = NSViewControllerRepresentable
+#endif
