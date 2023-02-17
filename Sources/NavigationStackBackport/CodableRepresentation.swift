@@ -8,7 +8,7 @@ public extension NavigationPath {
 
 extension NavigationPath.CodableRepresentation: Codable {
 	public init(from decoder: Decoder) throws {
-		if #available(iOS 16.0, *) {
+		if #available(iOS 16, macOS 13, *) {
 			storage = try SwiftUI.NavigationPath.CodableRepresentation(from: decoder)
 			return
 		}
@@ -26,7 +26,7 @@ extension NavigationPath.CodableRepresentation: Codable {
 	}
 
 	public func encode(to encoder: Encoder) throws {
-		if #available(iOS 16.0, *) {
+		if #available(iOS 16, macOS 13, *) {
 			try (storage as! SwiftUI.NavigationPath.CodableRepresentation).encode(to: encoder)
 			return
 		}

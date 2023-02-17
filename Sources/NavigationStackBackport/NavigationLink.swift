@@ -4,7 +4,7 @@ public struct NavigationLink<Label: View>: View {
 	public let body: AnyView
 
 	public init<P: Hashable>(value: P?, @ViewBuilder label: () -> Label) {
-		if #available(iOS 16.0, *) {
+        if #available(iOS 16, macOS 13, *) {
 			body = AnyView(SwiftUI.NavigationLink(value: value, label: label))
 		} else {
 			body = AnyView(Backport(label: label(), item: value.map { .init(value: $0) }))
@@ -12,7 +12,7 @@ public struct NavigationLink<Label: View>: View {
 	}
 
 	public init<P: Hashable>(value: P?, @ViewBuilder label: () -> Label) where P: Codable {
-		if #available(iOS 16.0, *) {
+        if #available(iOS 16, macOS 13, *) {
 			body = AnyView(SwiftUI.NavigationLink(value: value, label: label))
 		} else {
 			body = AnyView(Backport(label: label(), item: value.map { .init(value: $0) }))
@@ -20,7 +20,7 @@ public struct NavigationLink<Label: View>: View {
 	}
 
 	public init<P: Hashable>(_ titleKey: LocalizedStringKey, value: P?) where Label == Text {
-		if #available(iOS 16.0, *) {
+        if #available(iOS 16, macOS 13, *) {
 			body = AnyView(SwiftUI.NavigationLink(titleKey, value: value))
 		} else {
 			body = AnyView(Backport(label: Text(titleKey), item: value.map { .init(value: $0) }))
@@ -28,7 +28,7 @@ public struct NavigationLink<Label: View>: View {
 	}
 
 	public init<P: Hashable>(_ titleKey: LocalizedStringKey, value: P?) where Label == Text, P: Codable {
-		if #available(iOS 16.0, *) {
+        if #available(iOS 16, macOS 13, *) {
 			body = AnyView(SwiftUI.NavigationLink(titleKey, value: value))
 		} else {
 			body = AnyView(Backport(label: Text(titleKey), item: value.map { .init(value: $0) }))
@@ -36,7 +36,7 @@ public struct NavigationLink<Label: View>: View {
 	}
 
 	public init<P: Hashable, S>(_ title: S, value: P?) where Label == Text, S: StringProtocol {
-		if #available(iOS 16.0, *) {
+        if #available(iOS 16, macOS 13, *) {
 			body = AnyView(SwiftUI.NavigationLink(title, value: value))
 		} else {
 			body = AnyView(Backport(label: Text(title), item: value.map { .init(value: $0) }))
@@ -44,7 +44,7 @@ public struct NavigationLink<Label: View>: View {
 	}
 
 	public init<P: Hashable, S>(_ title: S, value: P?) where Label == Text, S: StringProtocol, P: Codable {
-		if #available(iOS 16.0, *) {
+        if #available(iOS 16, macOS 13, *) {
 			body = AnyView(SwiftUI.NavigationLink(title, value: value))
 		} else {
 			body = AnyView(Backport(label: Text(title), item: value.map { .init(value: $0) }))

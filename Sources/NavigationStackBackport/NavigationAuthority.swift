@@ -2,7 +2,8 @@ import Combine
 import SwiftUI
 
 class NavigationAuthority: NSObject, ObservableObject {
-	weak var navigationController: UINavigationController? {
+    
+	weak var navigationController: NavigationController? {
 		didSet { navigationController?.delegate = self }
 	}
 
@@ -38,7 +39,7 @@ extension NavigationAuthority {
 
 		path.items.enumerated().forEach { index, item in
 			guard viewControllers.indices.contains(index + 1), let view = destination.view(item, index + 1) else { return }
-			(viewControllers[index + 1] as? UIHostingController<AnyView>)?.rootView = view
+            (viewControllers[index + 1] as? HostingController<AnyView>)?.rootView = view
 		}
 	}
 
@@ -84,8 +85,8 @@ extension NavigationAuthority {
 	}
 }
 
-extension NavigationAuthority: UINavigationControllerDelegate {
-	func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
+extension NavigationAuthority: NavigationControllerDelegate {
+	func navigationController(_ navigationController: NavigationController, didShow viewController: ViewController, animated: Bool) {
 		let count = navigationController.viewControllers.count
 		defer { viewControllersCount = count }
 
@@ -129,7 +130,7 @@ private extension NavigationAuthority {
 				viewControllers.indices.contains(index + 1)
 			else { return }
 
-			(viewControllers[index + 1] as? UIHostingController<AnyView>)?.rootView = view(for: item, index: index + 1)
+			(viewControllers[index + 1] as? HostingController<AnyView>)?.rootView = view(for: item, index: index + 1)
 		}
 	}
 

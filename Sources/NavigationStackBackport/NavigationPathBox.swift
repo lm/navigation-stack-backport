@@ -10,7 +10,7 @@ protocol NavigationPathBox {
 	mutating func removeLast(_ k: Int)
 }
 
-@available(iOS 16.0, *)
+@available(iOS 16, macOS 13, *)
 extension SwiftUI.NavigationPath: NavigationPathBox {
 	var backportedCodable: NavigationPath.CodableRepresentation? {
 		codable.map(NavigationPath.CodableRepresentation.init(storage:))
