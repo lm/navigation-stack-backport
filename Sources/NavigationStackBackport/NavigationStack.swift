@@ -43,7 +43,7 @@ private extension NavigationStack {
 		}
 	}
 
-	struct AuthorityView<Root: View>: View {
+	struct AuthorityView: View {
 		@Binding var path: NavigationPathBackport
 		let root: Root
 
