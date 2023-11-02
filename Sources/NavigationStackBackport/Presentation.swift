@@ -8,6 +8,17 @@ public extension Backport {
 			content.modifier(PresentationModifier(isPresented: isPresented, destination: destination()))
 		}
 	}
+
+	@ViewBuilder func navigationDestination<D: Hashable, C: View>(
+		item: Binding<D?>,
+		@ViewBuilder destination: @escaping (D) -> C
+	) -> some View {
+		if #available(iOS 17.0, *) {
+			content.navigationDestination(item: item, destination: destination)
+		} else {
+			content.modifier(ItemPresentationModifier(item: item, destination: destination))
+		}
+	}
 }
 
 private struct PresentationModifier<C: View>: ViewModifier {
@@ -33,6 +44,27 @@ private struct PresentationModifier<C: View>: ViewModifier {
 				guard id == self.id else { return }
 				isPresented = false
 			}
+	}
+}
+
+private struct ItemPresentationModifier<D: Hashable, C: View>: ViewModifier {
+	@Binding var item: D?
+	let destination: (D) -> C
+
+	func body(content: Content) -> some View {
+		let isPresented = Binding {
+			item != nil
+		} set: {
+			if !$0 {
+				item = nil
+			}
+		}
+
+		content.backport.navigationDestination(isPresented: isPresented) {
+			if let item {
+				destination(item)
+			}
+		}
 	}
 }
 

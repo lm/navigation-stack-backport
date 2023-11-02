@@ -30,6 +30,10 @@ struct TestAppApp: App {
 				PresentedDestinationTestView(path: [1, 2])
 			case "--test-root-presented-destination":
 				PresentedDestinationTestView(path: [])
+			case "--test-item-destination":
+				DestinatinItemTestView(path: [1, 2])
+			case "--test-root-item-destination":
+				DestinatinItemTestView(path: [])
 			case "--test-link":
 				NavigationLinkTestView()
 			case "--test-link-outside-stack":
@@ -189,6 +193,47 @@ struct PresentedDestinationTestView: View {
 			}
 			.backport.navigationDestination(isPresented: $isPresented) {
 				Text("Nested Presentation")
+			}
+		}
+	}
+}
+
+struct DestinatinItemTestView: View {
+	@State var path: [Int]
+	@State var item: Int?
+
+	var body: some View {
+		NavigationStack(path: $path) {
+			Text("Root")
+				.backport.navigationDestination(for: Int.self) { _ in
+					VStack {
+						Text("Path Destination")
+						PresentationView()
+					}
+				}
+				.backport.navigationDestination(item: $item) { item in
+					VStack {
+						Text("Item \(item)")
+						PresentationView()
+					}
+				}
+		}
+		.overlay(VStack {
+			Button("Update Item") { item = (item ?? 0) + 1 }
+			Button("Clear Item") { item = nil }
+			Button("Update Path") { path[0] += 1 }
+		}, alignment: .bottom)
+	}
+
+	struct PresentationView: View {
+		@State var item: Int?
+
+		var body: some View {
+			Button("Update Nested Item") {
+				item = (item ?? 0) + 1
+			}
+			.backport.navigationDestination(item: $item) { _ in
+				Text("Nested Item")
 			}
 		}
 	}
