@@ -24,7 +24,7 @@
     {
       "parallelizable" : true,
       "target" : {
-        "containerPath" : "container:..\/..\/Medevio\/NavigationStackBackport",
+        "containerPath" : "container:..",
         "identifier" : "NavigationStackBackportTests",
         "name" : "NavigationStackBackportTests"
       }
