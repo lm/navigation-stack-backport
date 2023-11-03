@@ -46,16 +46,25 @@ extension NavigationAuthority {
 		let prevPresentation = presentations[id]
 		presentations[id] = presentation
 
-		guard let navigationController, presentation.isPresented != (prevPresentation?.isPresented ?? false) else { return }
+		guard let navigationController else { return }
+
+		let wasPresented = prevPresentation?.isPresented ?? false
+		let index = 1 + presentation.contextId + (presentationIds.lastIndex(of: id) ?? 0)
+
+		if presentation.isPresented && wasPresented && navigationController.viewControllers.indices.contains(index) {
+			(navigationController.viewControllers[index] as? UIHostingController<AnyView>)?.rootView = presentation.view
+			return
+		}
+
+		guard presentation.isPresented != wasPresented else { return }
 
 		Task { @MainActor in
 			var update = NavigationUpdate(navigationController: navigationController)
-			let index = 1 + presentation.contextId + (presentationIds.lastIndex(of: id) ?? 0)
 			let count = presentation.isPresented ? (index + 1) : index
 
 			update.viewControllers = Array(update.viewControllers.prefix(count))
 			if presentation.isPresented {
-				update.view(presentation.view(), at: index)
+				update.view(presentation.view, at: index)
 			}
 
 			update.commit()

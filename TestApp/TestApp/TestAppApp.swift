@@ -154,6 +154,7 @@ struct BackTapTestView: View {
 struct PresentedDestinationTestView: View {
 	@State var path: [Int]
 	@State private var isPresented = false
+	@State private var counter = 0
 
 	var body: some View {
 		NavigationStack(path: $path) {
@@ -167,6 +168,7 @@ struct PresentedDestinationTestView: View {
 				.backport.navigationDestination(isPresented: $isPresented) {
 					VStack {
 						Text("Presentation")
+						Text("Counter \(counter)")
 						PresentationView()
 					}
 				}
@@ -174,6 +176,7 @@ struct PresentedDestinationTestView: View {
 		.overlay(VStack {
 			Button("Toggle Presentation") { isPresented.toggle() }
 			Button("Update Path") { path[0] += 1 }
+			Button("Inc Counter") { counter += 1 }
 		}, alignment: .bottom)
 	}
 

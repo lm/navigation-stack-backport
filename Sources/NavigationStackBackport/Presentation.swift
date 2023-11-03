@@ -1,18 +1,18 @@
 import SwiftUI
 
 public extension Backport {
-	@ViewBuilder func navigationDestination<C: View>(isPresented: Binding<Bool>, @ViewBuilder destination: @escaping () -> C) -> some View {
+	@ViewBuilder func navigationDestination<C: View>(isPresented: Binding<Bool>, @ViewBuilder destination: () -> C) -> some View {
 		if #available(iOS 16.0, *) {
 			content.navigationDestination(isPresented: isPresented, destination: destination)
 		} else {
-			content.modifier(PresentationModifier(isPresented: isPresented, destination: destination))
+			content.modifier(PresentationModifier(isPresented: isPresented, destination: destination()))
 		}
 	}
 }
 
 private struct PresentationModifier<C: View>: ViewModifier {
 	@Binding var isPresented: Bool
-	let destination: () -> C
+	let destination: C
 
 	@Namespace private var id
 	@Environment(\.navigationContextId) private var contextId
@@ -39,12 +39,12 @@ private struct PresentationModifier<C: View>: ViewModifier {
 struct Presentation {
 	let contextId: Int
 	let isPresented: Bool
-	let view: () -> AnyView
+	let view: AnyView
 
-	init(contextId: Int, isPresented: Bool, view: @escaping () -> some View) {
+	init(contextId: Int, isPresented: Bool, view: some View) {
 		self.contextId = contextId
 		self.isPresented = isPresented
-		self.view = { AnyView(view().environment(\.navigationContextId, contextId)) }
+		self.view = AnyView(view.environment(\.navigationContextId, contextId))
 	}
 }
 

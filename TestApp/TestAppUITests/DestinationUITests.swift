@@ -34,6 +34,16 @@ final class DestinationUITests: XCTestCase {
 		XCTAssert(app.staticTexts["Nested Presentation"].waitForExistence(timeout: 1))
 	}
 
+	func testUpdatingPresentingDestination() {
+		let app = XCUIApplication()
+		app.launchArguments = ["--test-root-presented-destination"]
+		app.launch()
+		app.buttons["Toggle Presentation"].tap()
+		XCTAssert(app.staticTexts["Counter 0"].waitForExistence(timeout: 1))
+		app.buttons["Inc Counter"].tap()
+		XCTAssert(app.staticTexts["Counter 1"].waitForExistence(timeout: 1))
+	}
+
 	func testRootPresentingDestination() {
 		let app = XCUIApplication()
 		app.launchArguments = ["--test-root-presented-destination"]
