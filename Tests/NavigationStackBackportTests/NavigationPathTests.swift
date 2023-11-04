@@ -2,11 +2,11 @@
 import XCTest
 
 final class NavigationPathTests: XCTestCase {
-	private struct CodableItem: Hashable, Codable {
+	struct CodableItem: Hashable, Codable {
 		let x: Int
 	}
 
-	private struct UncodableItem: Hashable {}
+	struct UncodableItem: Hashable {}
 
 	private let encodablePath: NavigationPath = {
 		var path = NavigationPath()
