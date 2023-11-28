@@ -24,15 +24,15 @@ struct ContentView: View {
 	@State private var navigationPath = NavigationStackBackport.NavigationPath()
 
 	var body: some View {
-			NavigationStackBackport.NavigationStack(path: $navigationPath) {
-				Button("Push") {
-					navigationPath.append("Hello World")
-				}
-				.backport.navigationDestination(for: String.self) { value in
-					Image(systemName: "globe")
-						.navigationTitle(value) // use available SwiftUI's modifiers
-				}
+		NavigationStackBackport.NavigationStack(path: $navigationPath) {
+			Button("Push") {
+				navigationPath.append("Hello World")
 			}
+			.backport.navigationDestination(for: String.self) { value in
+				Image(systemName: "globe")
+					.navigationTitle(value) // use available SwiftUI's modifiers
+			}
+		}
 	}
 }
 
