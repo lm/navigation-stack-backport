@@ -21,21 +21,20 @@ Usage is the same as SwiftUI's `NavigationStack` on iOS 16, just prefix `Navigat
 import NavigationStackBackport
 
 struct ContentView: View {
-	@State private var navigationPath = NavigationStackBackport.NavigationPath()
+    @State private var navigationPath = NavigationStackBackport.NavigationPath()
 
-	var body: some View {
-			NavigationStackBackport.NavigationStack(path: $navigationPath) {
-				Button("Push") {
-					navigationPath.append("Hello World")
-				}
-				.backport.navigationDestination(for: String.self) { value in
-					Image(systemName: "globe")
-						.navigationTitle(value) // use available SwiftUI's modifiers
-				}
-			}
-	}
+    var body: some View {
+        NavigationStackBackport.NavigationStack(path: $navigationPath) {
+            Button("Push") {
+                navigationPath.append("Hello World")
+            }
+            .backport.navigationDestination(for: String.self) { value in
+                Image(systemName: "globe")
+                    .navigationTitle(value) // use available SwiftUI's modifiers
+            }
+        }
+    }
 }
-
 ```
 
 For more examples see the `TestApp` within this repository.
