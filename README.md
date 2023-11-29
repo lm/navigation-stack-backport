@@ -5,7 +5,7 @@
 ## Features
 
 - `NavigationPath` is fully supported including codable representation
-- `View.navigationDestination()` and `View.navigationDestination(isPresented:destination:)`
+- `View.navigationDestination()`, `View.navigationDestination(isPresented:destination:)` and `View.navigationDestination(item:destination:)`
 - `NavigationLink` with value
 - for now tested only on iOS
 
