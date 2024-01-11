@@ -11,7 +11,7 @@
 
 ## Getting Started
 
-Installation via Swift Package Manager is supported. Use `https://github.com/lm/navigation-stack-backport` as depedency URL. For more information how to add dependency in Xcode see https://developer.apple.com/documentation/xcode/adding-package-dependencies-to-your-app or add dependency in your Package.swift `.package(url: "https://github.com/lm/navigation-stack-backport", from: "1.0.0")`
+Installation via Swift Package Manager is supported. Use `https://github.com/lm/navigation-stack-backport` as depedency URL. For more information how to add dependency in Xcode see https://developer.apple.com/documentation/xcode/adding-package-dependencies-to-your-app or add dependency in your Package.swift `.package(url: "https://github.com/lm/navigation-stack-backport", from: "1.1.0")`
 
 ## Usage Example
 
